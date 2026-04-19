@@ -14,9 +14,12 @@ public class CoreTests
 
     [Theory]
     [InlineData(1, 1)]
-    [InlineData(2, 3)]
-    [InlineData(7, 5)]
     [InlineData(32, 32)]
+    [InlineData(120, 30)]
+    [InlineData(256, 128)]
+    [InlineData(512, 256)]
+    [InlineData(512, 512)]
+    [InlineData(768, 512)]
     public void IdentityKernel_IsIdentity(int width, int height)
     {
         var img = RandomImage(width, height);
@@ -27,6 +30,10 @@ public class CoreTests
     [Theory]
     [InlineData(1, 1, 3, 3)]
     [InlineData(17, 9, 5, 7)]
+    [InlineData(128, 512, 7, 5)]
+    [InlineData(256, 256, 9, 9)]
+    [InlineData(320, 240, 11, 7)]
+    [InlineData(512, 128, 15, 13)]
     public void ZeroKernel_ProducesZeros(int width, int height, int kernelWidth, int kernelHeight)
     {
         var img = RandomImage(width, height);
@@ -38,6 +45,9 @@ public class CoreTests
     [Theory]
     [InlineData(5, 5, 1, 2, 3, 4)]
     [InlineData(19, 11, 2, 2, 2, 2)]
+    [InlineData(31, 29, 4, 3, 5, 2)]
+    [InlineData(64, 64, 8, 8, 8, 8)]
+    [InlineData(127, 65, 6, 5, 6, 5)]
     public void PaddingKernelWithZeros_DoesNotChangeResult(int width, int height, int padLeft, int padTop, int padRight, int padBottom)
     {
         var img = RandomImage(width, height);
@@ -52,6 +62,9 @@ public class CoreTests
     [Theory]
     [InlineData(9, 7)]
     [InlineData(31, 29)]
+    [InlineData(63, 61)]
+    [InlineData(80, 72)]
+    [InlineData(128, 96)]
     public void ShiftAndInverseShift_ComposeToIdentity(int width, int height)
     {
         var img = RandomImage(width, height);
@@ -71,6 +84,9 @@ public class CoreTests
     [Theory]
     [InlineData(17, 13, 3, 3, 5, 5)]
     [InlineData(64, 31, 1, 1, 7, 3)]
+    [InlineData(128, 128, 5, 5, 3, 7)]
+    [InlineData(192, 97, 7, 7, 9, 5)]
+    [InlineData(256, 64, 9, 9, 3, 3)]
     public void SequentialApplication_EqualsKernelComposition(int width, int height, int KernelWidth_1, int KernelHeight_1, int KernelWidth_2, int KernelHeight_2)
     {
         var img = RandomImage(width, height);
@@ -92,11 +108,15 @@ public class CoreTests
     [InlineData(13, 9, BorderMode.Zero)]
     [InlineData(64, 64, BorderMode.Zero)]
     [InlineData(127, 33, BorderMode.Zero)]
+    [InlineData(128, 128, BorderMode.Zero)]
+    [InlineData(400, 200, BorderMode.Zero)]
     [InlineData(1, 1, BorderMode.Clamp)]
     [InlineData(2, 7, BorderMode.Clamp)]
     [InlineData(13, 9, BorderMode.Clamp)]
     [InlineData(64, 64, BorderMode.Clamp)]
     [InlineData(127, 33, BorderMode.Clamp)]
+    [InlineData(128, 128, BorderMode.Clamp)]
+    [InlineData(400, 200, BorderMode.Clamp)]
     public void Parallel_EqualsSequential_ForAllPartitionings(int width, int height, BorderMode borderMode)
     {
         var kernel = RandomKernelOdd(maxSize: 9);
@@ -117,6 +137,9 @@ public class CoreTests
 
     [Theory]
     [InlineData(64, 48)]
+    [InlineData(128, 128)]
+    [InlineData(256, 64)]
+    [InlineData(192, 512)]
     public void BoxBlur3_MatchesImageSharpBoxBlurRadius1(int width, int height)
     {
         var img = RandomImage(width, height);
@@ -141,10 +164,14 @@ public class CoreTests
     [InlineData(BorderMode.Zero, 2, 7)]
     [InlineData(BorderMode.Zero, 13, 9)]
     [InlineData(BorderMode.Zero, 64, 33)]
+    [InlineData(BorderMode.Zero, 128, 64)]
+    [InlineData(BorderMode.Zero, 192, 128)]
     [InlineData(BorderMode.Clamp, 1, 1)]
     [InlineData(BorderMode.Clamp, 2, 7)]
     [InlineData(BorderMode.Clamp, 13, 9)]
     [InlineData(BorderMode.Clamp, 64, 33)]
+    [InlineData(BorderMode.Clamp, 128, 64)]
+    [InlineData(BorderMode.Clamp, 192, 128)]
     public void Convolution_MatchesOpenCv_Filter2D_ForRandomKernels(BorderMode borderMode, int width, int height)
     {
         var kernel = RandomKernelOdd(maxSize: 9);

@@ -21,7 +21,7 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Install OpenCV
-      run: sudo apt-get update && sudo apt-get install -y libopencv-dev
+      run: sudo apt-get update && sudo apt-get install -y libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libopencv-dev
     - name: Restore dependencies
       run: dotnet restore
     - name: Build

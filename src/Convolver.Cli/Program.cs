@@ -96,35 +96,15 @@ static Kernel ResolveKernel(string? preset, string? text, string? file)
     return p switch
     {
         "identity" => Kernel.Identity(),
-        "box3" => new Kernel(
-            width: 3,
-            height: 3,
-            centerX: 1,
-            centerY: 1,
-            weights:
-            [
-                1f/9f, 1f/9f, 1f/9f,
-                1f/9f, 1f/9f, 1f/9f,
-                1f/9f, 1f/9f, 1f/9f,
-            ]),
-        "sharpen" => new Kernel(
-            width: 3,
-            height: 3,
-            centerX: 1,
-            centerY: 1,
-            weights:
-            [
-                0f, -1f, 0f,
-                -1f, 5f, -1f,
-                0f, -1f, 0f,
-            ]),
+        "box3" => Kernel.BoxBlur(),
+        "sharpen" => Kernel.Sharpen(),
         _ => throw new ArgumentException($"Unknown kernel preset: {preset}. Use box3|sharpen|identity.")
     };
 }
 
 var input = GrayImageIo.LoadAsGray(inputPath);
 
-var sw = System.Diagnostics.Stopwatch.StartNew();
+var timer = System.Diagnostics.Stopwatch.StartNew();
 GrayImage output;
 try
 {
@@ -140,8 +120,8 @@ catch (Exception e)
     Console.Error.WriteLine(e.Message);
     return 2;
 }
-sw.Stop();
+timer.Stop();
 
 GrayImageIo.SaveGrayAsBmp(output, outputPath);
-Console.WriteLine($"Done. {input.Width}x{input.Height}, mode={mode}, partition={partition}, border={border}, elapsed={sw.ElapsedMilliseconds} ms");
+Console.WriteLine($"Done. {input.Width}x{input.Height}, mode={mode}, partition={partition}, border={border}, elapsed={timer.ElapsedMilliseconds} ms");
 return 0;

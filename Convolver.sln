@@ -5,17 +5,17 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E7170ACE-9AAD-4689-ADC6-22E048D93B80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convolutioner.Core", "src\Convolutioner.Core\Convolutioner.Core.csproj", "{523C0934-7353-45C5-AB89-DFB54C98071F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convolver.Core", "src\Convolver.Core\Convolver.Core.csproj", "{523C0934-7353-45C5-AB89-DFB54C98071F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convolutioner.Cli", "src\Convolutioner.Cli\Convolutioner.Cli.csproj", "{A99E9047-15E4-492A-8C77-B2C82CAF0B0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convolver.Cli", "src\Convolver.Cli\Convolver.Cli.csproj", "{A99E9047-15E4-492A-8C77-B2C82CAF0B0B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5F4B7EAD-0AB8-4FBF-85F1-EA0BEE09832F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convolutioner.Tests", "test\Convolutioner.Tests\Convolutioner.Tests.csproj", "{69A51A1D-CE2E-4C75-AD2E-64ADC5F8E593}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convolver.Tests", "test\Convolver.Tests\Convolver.Tests.csproj", "{69A51A1D-CE2E-4C75-AD2E-64ADC5F8E593}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bench", "bench", "{2507B97A-9F2C-4A9C-A7A3-58541DDFA976}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convolutioner.Benchmarks", "bench\Convolutioner.Benchmarks\Convolutioner.Benchmarks.csproj", "{4E6BFCD2-D954-4FB9-AC30-1024FA7A9A3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convolver.Benchmarks", "bench\Convolver.Benchmarks\Convolver.Benchmarks.csproj", "{4E6BFCD2-D954-4FB9-AC30-1024FA7A9A3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

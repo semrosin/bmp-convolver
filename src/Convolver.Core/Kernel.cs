@@ -10,14 +10,14 @@ public sealed class Kernel
 
     public Kernel(int width, int height, int centerX, int centerY, float[] weights)
     {
-        if( width <= 0 ) throw new ArgumentOutOfRangeException(nameof(width));
-        if( height <= 0 ) throw new ArgumentOutOfRangeException(nameof(height));
-        if( centerX < 0 ) throw new ArgumentOutOfRangeException(nameof(centerX));
-        if( centerX >= width ) throw new ArgumentOutOfRangeException(nameof(centerX));
-        if( centerY < 0 ) throw new ArgumentOutOfRangeException(nameof(centerY));
-        if( centerY >= height ) throw new ArgumentOutOfRangeException(nameof(centerY));
+        if( width <= 0 ) throw new ArgumentOutOfRangeException(nameof(width), width, "Size must be a positive integer.");
+        if( height <= 0 ) throw new ArgumentOutOfRangeException(nameof(height), height, "Size must be a positive integer.");
+        if( centerX < 0 ) throw new ArgumentOutOfRangeException(nameof(centerX), centerX, "Center must be within the kernel bounds.");
+        if( centerX >= width ) throw new ArgumentOutOfRangeException(nameof(centerX), centerX, "Center must be within the kernel bounds.");
+        if( centerY < 0 ) throw new ArgumentOutOfRangeException(nameof(centerY), centerY, "Center must be within the kernel bounds.");
+        if( centerY >= height ) throw new ArgumentOutOfRangeException(nameof(centerY), centerY, "Center must be within the kernel bounds.");
         ArgumentNullException.ThrowIfNull(weights);
-        if (weights.Length != width * height) throw new ArgumentException("Weights length must be width*height.");
+        if (weights.Length != width * height) throw new ArgumentException(nameof(weights), "Weights length must be width*height.");
 
         Width = width;
         Height = height;
@@ -33,9 +33,9 @@ public sealed class Kernel
 
     public static Kernel Zero(int width, int height)
     {
-        var cx = width / 2;
-        var cy = height / 2;
-        return new Kernel(width, height, cx, cy, new float[width * height]);
+        var centerX = width / 2;
+        var centerY = height / 2;
+        return new Kernel(width, height, centerX, centerY, new float[width * height]);
     }
 
     /// <summary>
@@ -43,17 +43,49 @@ public sealed class Kernel
     /// </summary>
     public static Kernel Delta(int dx, int dy)
     {
-        var w = Math.Abs(dx) * 2 + 1;
-        var h = Math.Abs(dy) * 2 + 1;
-        var cx = w / 2;
-        var cy = h / 2;
+        var width = Math.Abs(dx) * 2 + 1;
+        var height = Math.Abs(dy) * 2 + 1;
+        var centerX = width / 2;
+        var centerY = height / 2;
 
-        var weights = new float[w * h];
-        var kx = cx - dx;
-        var ky = cy - dy;
-        weights[(ky * w) + kx] = 1f;
-        return new Kernel(w, h, cx, cy, weights);
+        var weights = new float[width * height];
+        var kx = centerX - dx;
+        var ky = centerY - dy;
+        weights[(ky * width) + kx] = 1f;
+        return new Kernel(width, height, centerX, centerY, weights);
     }
+
+    /// <summary>
+    /// Box blur kernel of the given size.
+    /// </summary>
+    public static Kernel BoxBlur(int size = 3)
+    {
+        if (size <= 0 || size % 2 == 0)
+            throw new ArgumentOutOfRangeException(nameof(size), "Size must be a positive odd number.");
+
+        var weight = 1f / (size * size);
+        var weights = new float[size * size];
+        Array.Fill(weights, weight);
+        var center = size / 2;
+
+        return new Kernel(size, size, center, center, weights);
+    }
+
+    /// <summary>
+    /// Sharpening kernel (Laplacian-based unsharp mask).
+    /// </summary>
+    public static Kernel Sharpen()
+        => new(
+            width: 3,
+            height: 3,
+            centerX: 1,
+            centerY: 1,
+            weights:
+            [
+                 0f, -1f,  0f,
+                -1f,  5f, -1f,
+                 0f, -1f,  0f,
+            ]);
 
     /// <summary>
     /// Composition for Zero border (infinite zero-extended domain):

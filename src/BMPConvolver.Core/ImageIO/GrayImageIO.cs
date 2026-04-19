@@ -1,7 +1,7 @@
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
-namespace Convolutioner.Core.ImageSharp;
+namespace BMPConvolver.Core.ImageSharp;
 
 public static class GrayImageIo
 {

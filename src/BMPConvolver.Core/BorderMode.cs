@@ -1,4 +1,4 @@
-namespace Convolutioner.Core;
+namespace BMPConvolver.Core;
 
 public enum BorderMode
 {

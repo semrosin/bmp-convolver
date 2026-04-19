@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Convolutioner.Core\Convolutioner.Core.csproj" />
+    <ProjectReference Include="..\BMPConvolver.Core\BMPConvolver.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

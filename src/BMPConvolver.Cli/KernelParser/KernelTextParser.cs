@@ -1,7 +1,7 @@
 using System.Globalization;
-using Convolutioner.Core;
+using BMPConvolver.Core;
 
-namespace Convolutioner.Cli.KernelText;
+namespace BMPConvolver.Cli.KernelParser;
 
 public static class KernelTextParser
 {

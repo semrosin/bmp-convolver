@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Convolutioner.Cli\Convolutioner.Cli.csproj" />
+    <ProjectReference Include="..\..\src\BMPConvolver.Cli\BMPConvolver.Cli.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Convolutioner.Core\Convolutioner.Core.csproj" />
+    <ProjectReference Include="..\..\src\BMPConvolver.Core\BMPConvolver.Core.csproj" />
   </ItemGroup>
 
 </Project>

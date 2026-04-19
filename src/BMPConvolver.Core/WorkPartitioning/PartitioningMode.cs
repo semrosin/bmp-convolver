@@ -1,4 +1,4 @@
-namespace Convolutioner.Core.WorkPartitioning;
+namespace BMPConvolver.Core.WorkPartitioning;
 
 public enum PartitioningMode
 {

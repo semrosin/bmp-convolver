@@ -1,4 +1,4 @@
-namespace Convolutioner.Core.WorkPartitioning;
+namespace BMPConvolver.Core.WorkPartitioning;
 
 public readonly record struct WorkRect(int X, int Y, int Width, int Height)
 {

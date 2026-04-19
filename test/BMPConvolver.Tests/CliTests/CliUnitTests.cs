@@ -1,6 +1,6 @@
-using Convolutioner.Cli.KernelText;
+using BMPConvolver.Cli.KernelParser;
 
-namespace Convolutioner.Tests.CLITests;
+namespace BMPConvolver.Tests.CLITests;
 
 public class CliTests
 {

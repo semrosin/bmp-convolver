@@ -1,12 +1,12 @@
-﻿using Convolutioner.Core;
-using Convolutioner.Core.ImageSharp;
-using Convolutioner.Cli.KernelText;
-using Convolutioner.Core.WorkPartitioning;
+﻿using BMPConvolver.Core;
+using BMPConvolver.Core.ImageSharp;
+using BMPConvolver.Cli.KernelParser;
+using BMPConvolver.Core.WorkPartitioning;
 
 static int PrintUsage()
 {
     Console.Error.WriteLine("Usage:");
-    Console.Error.WriteLine("  Convolutioner.Cli <input.bmp> <output.bmp> [--mode seq|par] [--partition pixels|rows|cols|grid] [--grid XxY] [--border zero|clamp]");
+    Console.Error.WriteLine("  BMPConvolver.Cli <input.bmp> <output.bmp> [--mode seq|par] [--partition pixels|rows|cols|grid] [--grid XxY] [--border zero|clamp]");
     Console.Error.WriteLine("                   [--kernel box3|sharpen|identity] [--kernel-text \"...\"] [--kernel-file path.txt]");
     Console.Error.WriteLine();
     Console.Error.WriteLine("Kernel text format:");

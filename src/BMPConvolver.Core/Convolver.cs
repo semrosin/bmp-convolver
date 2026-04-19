@@ -1,6 +1,6 @@
-using Convolutioner.Core.WorkPartitioning;
+using BMPConvolver.Core.WorkPartitioning;
 
-namespace Convolutioner.Core;
+namespace BMPConvolver.Core;
 
 public static class Convolver
 {
